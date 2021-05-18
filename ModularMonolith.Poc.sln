@@ -9,13 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module1", "Module1", "{7897
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module2", "Module2", "{E320D763-A141-4BB2-9E59-1EEF9DEC12D6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module1.Application", "Module1.Application\Module1.Application.csproj", "{5A0F1933-9629-4A4F-B890-273B0447FE2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module1.Application", "Module1\Module1.Application\Module1.Application.csproj", "{5A0F1933-9629-4A4F-B890-273B0447FE2D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module2.Application", "Module2.Application\Module2.Application.csproj", "{7A512C1E-D80F-4228-80C3-19FF8958E36F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module2.Application", "Module2\Module2.Application\Module2.Application.csproj", "{7A512C1E-D80F-4228-80C3-19FF8958E36F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module1.IntegrationEvents", "Module1.IntegrationEvents\Module1.IntegrationEvents.csproj", "{0F7D2213-8E05-4EE0-A442-680912D11424}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module1.IntegrationEvents", "Module1\Module1.IntegrationEvents\Module1.IntegrationEvents.csproj", "{0F7D2213-8E05-4EE0-A442-680912D11424}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module2.IntegrationEvents", "Module2.IntegrationEvents\Module2.IntegrationEvents.csproj", "{E43D35E5-D28E-4950-AC64-784C90ECD739}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module2.IntegrationEvents", "Module2\Module2.IntegrationEvents\Module2.IntegrationEvents.csproj", "{E43D35E5-D28E-4950-AC64-784C90ECD739}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModularMonolith.Infrastructure", "ModularMonolith.Infrastructure\ModularMonolith.Infrastructure.csproj", "{188EF635-0321-44AC-A4F5-8F3CA00953F7}"
 EndProject

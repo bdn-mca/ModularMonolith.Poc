@@ -9,9 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModularMonolith.Infrastructure\ModularMonolith.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\ModularMonolith.Infrastructure\ModularMonolith.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Module2\Module2.IntegrationEvents\Module2.IntegrationEvents.csproj" />
     <ProjectReference Include="..\Module1.IntegrationEvents\Module1.IntegrationEvents.csproj" />
-    <ProjectReference Include="..\Module2.IntegrationEvents\Module2.IntegrationEvents.csproj" />
   </ItemGroup>
 
 </Project>
