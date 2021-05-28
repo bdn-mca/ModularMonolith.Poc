@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ModularMonolith.Infrastructure.EventBus;
+using ModularMonolith.Infrastructure.Mediator;
 using Module1.Application.Startup;
 using Module2.Application.Startup;
 
@@ -49,6 +50,13 @@ namespace ModularMonolith.Poc.API
                 });
             });
             services.AddMassTransitHostedService();
+
+            // mediator setup with: https://masstransit-project.com/
+            services.AddScoped<IMmpMediator, MmpMediator>();
+            services.AddMediator(cfg =>
+            {
+                cfg.AddConsumers(typeof(Module1.Application.Commands.Demo.Command).Assembly);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
