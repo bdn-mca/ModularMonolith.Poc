@@ -26,8 +26,8 @@ namespace ModularMonolith.Poc.API
             services.AddControllers();
 
             // so we can have controllers in the separate modules instead all controllers in the API project
-            services.AddMvc().AddApplicationPart(typeof(Module1.Application.ExecuteController).Assembly).AddControllersAsServices();
-            services.AddMvc().AddApplicationPart(typeof(Module2.Application.OrderController).Assembly).AddControllersAsServices();
+            services.AddMvc().AddApplicationPart(typeof(Module1.Application.IntegrationEventController).Assembly).AddControllersAsServices();
+            services.AddMvc().AddApplicationPart(typeof(Module2.Application.IntegrationEventController).Assembly).AddControllersAsServices();
 
             //event bus setup with: https://masstransit-project.com/
             services.AddScoped<IEventBusDispatcher, EventBusDispatcher>();

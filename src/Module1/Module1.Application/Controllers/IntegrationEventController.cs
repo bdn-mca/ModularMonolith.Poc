@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace Module1.Application
 {
     [ApiController]
-    [Route("module-one")]
-    public class ExecuteController : ControllerBase
+    [Route("module-one/integration-event")]
+    public class IntegrationEventController : ControllerBase
     {
         private IEventBusDispatcher eventDispatch;
 
-        public ExecuteController(IEventBusDispatcher eventDispatch)
+        public IntegrationEventController(IEventBusDispatcher eventDispatch)
         {
             this.eventDispatch = eventDispatch;
         }
