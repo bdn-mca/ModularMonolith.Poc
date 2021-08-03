@@ -26,6 +26,27 @@ namespace Module1.Application.Controllers
             return Ok(result);
         }
 
+        [Route("demo-2")]
+        public async Task<IActionResult> PostDemo2()
+        {
+            var result = await mediator.Send<Demo2.Command, Demo2.Response>(new Demo2.Command());
+            return Ok(result);
+        }
+
+        [Route("example")]
+        public async Task<IActionResult> PostExample()
+        {
+            var result = await mediator.Send<Example.Command, Example.Response>(new Example.Command());
+            return Ok(result);
+        }
+
+        [Route("tutorial")]
+        public async Task<IActionResult> PostTutorial()
+        {
+            var result = await mediator.Send<Tutorial.Command, Tutorial.Response>(new Tutorial.Command());
+            return Ok(result);
+        }
+
         [Route("no-result")]
         public async Task<IActionResult> PostNoResult()
         {
