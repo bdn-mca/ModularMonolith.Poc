@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ModularMonolith.Infrastructure.EventBus;
 using ModularMonolith.Infrastructure.Mediator;
+using Module1.Application.Filters;
 using Module1.Application.Startup;
 using Module2.Application.Startup;
 
@@ -47,6 +48,7 @@ namespace ModularMonolith.Poc.API
                         retryConfiguration.Intervals(2000, 4000, 10000); // in ms
                     });
                     cfg.ConfigureEndpoints(context);
+
                 });
             });
             services.AddMassTransitHostedService();

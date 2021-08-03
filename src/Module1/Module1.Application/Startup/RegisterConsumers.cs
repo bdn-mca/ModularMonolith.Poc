@@ -8,7 +8,8 @@ namespace Module1.Application.Startup
         public static void RegisterModuleOneConsumers(this IServiceCollectionBusConfigurator configurator)
         {
             configurator.AddConsumer<ExecuteHappenedConsumer>();
-            configurator.AddConsumer<ItemOrderedConsumer>();
+            configurator.AddConsumer<ItemOrderedConsumer>(typeof(ItemOrderedConsumerDefinition));
+
         }
     }
 }
