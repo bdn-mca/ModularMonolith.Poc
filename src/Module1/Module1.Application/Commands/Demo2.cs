@@ -4,8 +4,6 @@ using MassTransit.Definition;
 using ModularMonolith.Infrastructure.Mediator;
 using Module1.Application.Validators;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Module1.Application.Commands
@@ -32,6 +30,18 @@ namespace Module1.Application.Commands
                 {
                     Uid = Guid.NewGuid()
                 };
+            }
+        }
+
+        public class Definition : ConsumerDefinition<Handler>
+        {
+            protected override void ConfigureConsumer(
+                MassTransit.IReceiveEndpointConfigurator endpointConfigurator,
+                IConsumerConfigurator<Handler> consumerConfigurator)
+            {
+                base.ConfigureConsumer(endpointConfigurator, consumerConfigurator);
+
+                endpointConfigurator.UseFilter(new DemoValidator<Command>());
             }
         }
     }
