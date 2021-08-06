@@ -2,6 +2,7 @@ using GreenPipes;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +10,7 @@ using ModularMonolith.Infrastructure.EventBus;
 using ModularMonolith.Infrastructure.Mediator;
 using Module1.Application.Startup;
 using Module2.Application.Startup;
+using System;
 
 namespace ModularMonolith.Poc.API
 {
@@ -52,10 +54,12 @@ namespace ModularMonolith.Poc.API
             services.AddMassTransitHostedService();
 
             // mediator setup with: https://masstransit-project.com/
+            services.AddHttpContextAccessor();
             services.AddScoped<IMmpMediator, MmpMediator>();
             services.AddMediator(cfg =>
             {
                 cfg.AddConsumers(typeof(Module1.Application.Commands.Demo.Command).Assembly);
+                cfg.ConfigureMediator((context, mediatorCfg) => mediatorCfg.UseHttpContextScopeFilter(context));
             });
         }
 
