@@ -57,14 +57,12 @@ namespace ModularMonolith.Poc.API
             services.AddMassTransitHostedService();
 
             // mediator setup with: https://masstransit-project.com/
-            services.AddHttpContextAccessor();
             services.AddScoped<IMmpMediator, MmpMediator>();
             services.AddMediator(cfg =>
             {
                 cfg.AddConsumers(
                     type => type.BaseType?.Name?.Contains(nameof(CommandHandler<MmpCommand, object>)) ?? false,
                     typeof(Module1.Application.Commands.Demo.Command).Assembly);
-                cfg.ConfigureMediator((context, mediatorCfg) => mediatorCfg.UseHttpContextScopeFilter(context));
             });
         }
 
