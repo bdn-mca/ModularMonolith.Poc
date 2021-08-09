@@ -27,6 +27,9 @@ namespace ModularMonolith.Poc.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services
+                .RegisterModuleOne()
+                .RegisterModuleTwo();
 
             // so we can have controllers in the separate modules instead all controllers in the API project
             services.AddMvc().AddApplicationPart(typeof(Module1.Application.IntegrationEventController).Assembly).AddControllersAsServices();
@@ -58,7 +61,9 @@ namespace ModularMonolith.Poc.API
             services.AddScoped<IMmpMediator, MmpMediator>();
             services.AddMediator(cfg =>
             {
-                cfg.AddConsumers(typeof(Module1.Application.Commands.Demo.Command).Assembly);
+                cfg.AddConsumers(
+                    type => type.BaseType?.Name?.Contains(nameof(CommandHandler<MmpCommand, object>)) ?? false,
+                    typeof(Module1.Application.Commands.Demo.Command).Assembly);
                 cfg.ConfigureMediator((context, mediatorCfg) => mediatorCfg.UseHttpContextScopeFilter(context));
             });
         }

@@ -1,6 +1,9 @@
 ﻿using GreenPipes;
+using MassTransit;
 using MassTransit.ConsumeConfigurators;
 using MassTransit.Definition;
+using MassTransit.Registration;
+using Microsoft.Extensions.DependencyInjection;
 using ModularMonolith.Infrastructure.Mediator;
 using Module1.Application.Validators;
 using System;
@@ -35,13 +38,21 @@ namespace Module1.Application.Commands
 
         public class Definition : ConsumerDefinition<Handler>
         {
+            private readonly IServiceProvider serviceProvider;
+
+            public Definition(IServiceProvider serviceProvider)
+            {
+                this.serviceProvider = serviceProvider;
+            }
+
             protected override void ConfigureConsumer(
                 MassTransit.IReceiveEndpointConfigurator endpointConfigurator,
                 IConsumerConfigurator<Handler> consumerConfigurator)
             {
                 base.ConfigureConsumer(endpointConfigurator, consumerConfigurator);
 
-                endpointConfigurator.UseFilter(new TutorialValidator<Command>());
+                var massTransitConfigurationServiceProvider = serviceProvider.GetRequiredService<IConfigurationServiceProvider>();
+                endpointConfigurator.UseConsumeFilter(typeof(TutorialValidator<>), massTransitConfigurationServiceProvider);
             }
         }
     }

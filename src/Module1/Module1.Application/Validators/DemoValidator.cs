@@ -1,6 +1,7 @@
 ﻿using GreenPipes;
 using MassTransit;
 using ModularMonolith.Infrastructure.Mediator;
+using Module1.Application.Services;
 using System;
 using System.Threading.Tasks;
 
@@ -16,8 +17,8 @@ namespace Module1.Application.Validators
         {
             if (context.TryGetPayload(out IServiceProvider serviceProvider))
             {
-                // this never executes
-                // probably because this is ConsumeContext, rather than SendContext where the payload is set
+                IDummyService dummyService = serviceProvider.GetService(typeof(IDummyService)) as IDummyService;
+                await dummyService.Validate();
             }
             
             await next.Send(context);
