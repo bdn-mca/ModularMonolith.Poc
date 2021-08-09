@@ -2,6 +2,7 @@ using GreenPipes;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +10,7 @@ using ModularMonolith.Infrastructure.EventBus;
 using ModularMonolith.Infrastructure.Mediator;
 using Module1.Application.Startup;
 using Module2.Application.Startup;
+using System;
 
 namespace ModularMonolith.Poc.API
 {
@@ -25,6 +27,9 @@ namespace ModularMonolith.Poc.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services
+                .RegisterModuleOne()
+                .RegisterModuleTwo();
 
             // so we can have controllers in the separate modules instead all controllers in the API project
             services.AddMvc().AddApplicationPart(typeof(Module1.Application.IntegrationEventController).Assembly).AddControllersAsServices();
@@ -55,7 +60,9 @@ namespace ModularMonolith.Poc.API
             services.AddScoped<IMmpMediator, MmpMediator>();
             services.AddMediator(cfg =>
             {
-                cfg.AddConsumers(typeof(Module1.Application.Commands.Demo.Command).Assembly);
+                cfg.AddConsumers(
+                    type => type.BaseType?.Name?.Contains(nameof(CommandHandler<MmpCommand, object>)) ?? false,
+                    typeof(Module1.Application.Commands.Demo.Command).Assembly);
             });
         }
 
