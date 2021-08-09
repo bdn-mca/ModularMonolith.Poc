@@ -55,8 +55,11 @@ namespace Module1.Application.Commands
 
                 endpointConfigurator.UseFilter(new DemoValidator<Command>(serviceProvider));
 
-                //var massTransitConfigurationServiceProvider = serviceProvider.GetRequiredService<IConfigurationServiceProvider>();
-                //endpointConfigurator.UseConsumeFilter(typeof(DemoValidator<>), massTransitConfigurationServiceProvider);
+                // suggested code: https://stackoverflow.com/a/68683874/2567835
+                // issue is that the filter now executes for ALL consumers, while it should only execute for the consumers
+                // that have registered it (i.e. Demo and Demo2 in this example)
+                //var csp = serviceProvider.GetRequiredService<IConfigurationServiceProvider>();
+                //endpointConfigurator.UseConsumeFilter(typeof(DemoValidator<>), csp);
             }
         }
     }

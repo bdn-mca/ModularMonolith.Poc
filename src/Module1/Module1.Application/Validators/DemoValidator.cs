@@ -29,13 +29,14 @@ namespace Module1.Application.Validators
                 await dummyService.Validate();
             }
 
+            // suggested code: https://stackoverflow.com/a/68683874/2567835
+            // this worked for resolving dependency, but filters were executed for each consumer
             //if (context.TryGetPayload(out IServiceProvider serviceProvider))
             //{
-            //    this worked for resolving dependency, but filters were executed for each consumer
             //    IDummyService dummyService = serviceProvider.GetService(typeof(IDummyService)) as IDummyService;
             //    await dummyService.Validate();
             //}
-            
+
             await next.Send(context);
         }
     }
