@@ -51,8 +51,7 @@ namespace Module1.Application.Commands
             {
                 base.ConfigureConsumer(endpointConfigurator, consumerConfigurator);
 
-                var massTransitConfigurationServiceProvider = serviceProvider.GetRequiredService<IConfigurationServiceProvider>();
-                endpointConfigurator.UseConsumeFilter(typeof(DemoValidator<>), massTransitConfigurationServiceProvider);
+                endpointConfigurator.UseFilter(new DemoValidator<Command>(serviceProvider));
             }
         }
     }
